@@ -9,7 +9,11 @@ void runnerApp() {
   Bloc.observer = AppBlocObserver();
 
   runZonedGuarded(
-    () => runApp(const App()),
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      runApp(const App());
+    },
     (error, stackTrace) => error.recordError(stackTrace: stackTrace),
   );
 }

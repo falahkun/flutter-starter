@@ -26,7 +26,7 @@ class AppRouter {
     errorBuilder: (context, state) {
       return Text('Error Page : ${state.error}');
     },
-    urlPathStrategy: UrlPathStrategy.path,
+    // urlPathStrategy: UrlPathStrategy.path,
     debugLogDiagnostics: kDebugMode,
   );
 }

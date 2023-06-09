@@ -2,52 +2,54 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_starter/core/core.dart';
 
-extension DioErrorExtension on DioError {
+extension DioErrorExtension on DioException {
   ServerException toServerException() {
+    final msg = message ?? 'UNHANDLED_ERROR';
     switch (type) {
-      // TODO(type): Implement error message by your sever error message.
-      case DioErrorType.response:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.badCertificate:
+      case DioExceptionType.connectionError:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.cancel:
+
+
+        return TimeOutServerException(
+          message: msg,
+          code: response?.statusCode,
+        );
+      case DioExceptionType.badResponse:
         switch (response?.statusCode) {
           case 401:
             return UnAuthenticationServerException(
-              message: message,
+              message: msg,
               code: response?.statusCode,
             );
           case 403:
             return UnAuthorizeServerException(
-              message: message,
+              message: msg,
               code: response?.statusCode,
             );
           case 404:
             return NotFoundServerException(
-              message: message,
+              message: msg,
               code: response?.statusCode,
             );
           case 500:
           case 502:
             return InternalServerException(
-              message: message,
+              message: msg,
               code: response?.statusCode,
             );
           default:
             return GeneralServerException(
-              message: message,
+              message: msg,
               code: response?.statusCode,
             );
         }
-
-      case DioErrorType.connectTimeout:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
-        return TimeOutServerException(
-          message: message,
-          code: response?.statusCode,
-        );
-
-      case DioErrorType.cancel:
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
         return GeneralServerException(
-          message: message,
+          message: msg,
           code: response?.statusCode,
         );
     }

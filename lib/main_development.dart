@@ -7,7 +7,6 @@ import 'package:flutter_starter/app/locator.dart';
 import 'package:flutter_starter/app/runner.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   F.flavor = Flavor.dev;
 
   await setupLocator();
