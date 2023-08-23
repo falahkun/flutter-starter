@@ -1,9 +1,6 @@
 # Flutter Starter
 
-[![Wisnuwiry][logo]][website_link]
-
 [![Language][dart_language_badge]](http://dart.dev)
-[![Flutter Starter][github_action_badge]][github_action_workflow_link]
 [![Codecov][codecov_badge]][codecov_link]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
